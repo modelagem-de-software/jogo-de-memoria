@@ -1,25 +1,8 @@
 <template>
   <div class="d-flex justify-center align-center fill-height">
     <div class="bg-white col-4 box-com-sombra d-flex justify-center align-center border-radius-5">
-      <v-list rounded>
-      <v-subheader class="mt-5 mb-5">
-        <h1>Jogo de Memória</h1>
-      </v-subheader>
-        <v-list-item
-                v-for="(botao, index) in botoes"
-                :key="index"
-                @click="irPara(botao.rota)"
-        >
-          <v-list-item-icon>
-            <v-icon v-if="botao.icon" color="pink">{{ botao.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-              <v-list-item-title v-text="botao.nome"></v-list-item-title>
-          </v-list-item-content>
-
-        </v-list-item>
-      </v-list>
+      <mensagens :text="mensagem.text" :snackbar="mensagem.visivel"></mensagens>
+      <itens-menu :botoes="botoes" titulo="Card Reward"></itens-menu>
     </div>
   </div>
 </template>
@@ -27,33 +10,37 @@
 <script>
 // @ is an alias to /src
 
+import ItensMenu from "@/components/shared/ItensMenu";
+import MenuService from "@/services/MenuService";
+import Mensagens from "@/components/shared/Mensagens";
+
 export default {
   name: "MenuPrincipal",
-  data: ()=> ({
-    botoes: [
-      {
-        nome: 'Jogar',
-        cor: 'primary',
-        rota: '/jogar',
-        icon: 'mdi-gamepad-variant-outline',
-      },
-      {
-        nome: 'Configurar Jogo',
-        cor: 'blue lighten-2',
-        rota: '/configurar-jogo',
-        icon: 'mdi-account-cog',
-      },
-      {
-        nome: 'Configurar Cartas',
-        cor: 'teal darken-3',
-        rota: '/configurar-cartas',
-        icon: 'mdi-cards',
-      },
-    ]
-  }),
+  components: {Mensagens, ItensMenu},
+  data() {
+    return {
+      botoes: [],
+      mensagem: {
+        text: '',
+        visivel: false
+      }
+    }
+  },
+  created() {
+    this.getItensMenu();
+  },
   methods: {
-    irPara(rota) {
-      this.$router.push({ path: rota });
+    async getItensMenu() {
+      await MenuService
+              .getItensMenu('/menu_principal')
+              .then(response => {
+                if (response) {
+                  this.botoes = response.data;
+                }
+              }, () => {
+                this.mensagem.text = 'Não foi possível obter os dados do servidor'
+                this.mensagem.visivel = true;
+              });
     }
   }
 }

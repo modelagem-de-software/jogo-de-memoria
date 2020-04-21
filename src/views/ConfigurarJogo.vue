@@ -5,10 +5,11 @@
                 <v-col>
                     <head-pagina></head-pagina>
                     <v-row>
-                        <v-col>
+                        <v-col cols="12" class="d-flex justify-center align-center">
                             <!-- Inicia conteúdo da página -->
                             <div class="mt-10">
-                                <h1>PÁGINA CONFIGURAR JOGO</h1>
+                                <mensagens :text="mensagem.text" :snackbar="mensagem.visivel"></mensagens>
+                                <itens-menu :botoes="botoes" titulo="Configurações do Jogo"></itens-menu>
                             </div>
                             <!-- Final conteúdo da página -->
                         </v-col>
@@ -23,11 +24,41 @@
 </template>
 
 <script>
-    import HeadPagina from "@/components/head-pagina";
-    export default {
-        name: "ConfigurarJogo",
-        components: {HeadPagina}
+import HeadPagina from "@/components/shared/HeadPagina";
+import ItensMenu from "@/components/shared/ItensMenu";
+import Mensagens from "@/components/shared/Mensagens";
+import MenuService from "@/services/MenuService";
+
+export default {
+    name: "ConfigurarJogo",
+    components: {HeadPagina, ItensMenu, Mensagens},
+    data() {
+        return {
+            botoes: [],
+            mensagem: {
+                text: '',
+                visivel: false
+            }
+        }
+    },
+    created() {
+        this.getItensMenu();
+    },
+    methods: {
+        async getItensMenu() {
+            await MenuService
+                .getItensMenu('/menu_configurar_jogo')
+                .then(response => {
+                    if (response) {
+                        this.botoes = response.data;
+                    }
+                }, () => {
+                    this.mensagem.text = 'Não foi possível obter os dados do servidor'
+                    this.mensagem.visivel = true;
+                })
+        }
     }
+}
 </script>
 
 <style scoped>

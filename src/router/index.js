@@ -25,6 +25,16 @@ Vue.use(VueRouter)
     component: () => import(/* lazyloading ConfigurarJogo */ '../views/ConfigurarJogo.vue')
   },
   {
+    path: '/configurar-jogo/selecionar-dificuldade',
+    name: 'Selecionar Dificuldade',
+    component: () => import(/* lazyloading SelecionarDificuldade */ '../views/SelecionarDificuldade.vue')
+  },
+  {
+    path: '/configurar-jogo/selecionar-skin',
+    name: 'Selecionar Skin',
+    component: () => import(/* lazyloading SelecionarSkin */ '../views/SelecionarSkin.vue')
+  },
+  {
     path: '/configurar-cartas',
     name: 'Configurações de Cartas',
     component: () => import(/* lazyloading ConfigurarCartas */ '../views/ConfigurarCartas.vue')

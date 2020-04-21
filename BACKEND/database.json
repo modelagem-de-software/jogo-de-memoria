@@ -1,0 +1,118 @@
+{
+  "menu_principal": [
+    {
+      "nome": "Jogar",
+      "cor": "primary",
+      "rota": "/jogar",
+      "icon": "mdi-gamepad-variant-outline",
+      "cor_icon": "pink"
+    },
+    {
+      "nome": "Configurar Jogo",
+      "cor": "blue lighten-2",
+      "rota": "/configurar-jogo",
+      "icon": "mdi-account-cog",
+      "cor_icon": "pink"
+    },
+    {
+      "nome": "Configurar Cartas",
+      "cor": "teal darken-3",
+      "rota": "/configurar-cartas",
+      "icon": "mdi-cards",
+      "cor_icon": "pink"
+    }
+  ],
+  "menu_configurar_jogo": [
+    {
+      "nome": "Selecionar Dificuldade",
+      "cor": "primary",
+      "icon": "mdi-camera-timer",
+      "rota": "/configurar-jogo/selecionar-dificuldade",
+      "cor_icon": "blue"
+    },
+    {
+      "nome": "Configurar Skins",
+      "cor": "secondary",
+      "icon": "mdi-brush",
+      "rota": "/configurar-jogo/selecionar-skin",
+      "cor_icon": "blue"
+    }
+  ],
+  "menu_dificuldade": [
+    {
+      "id": 1,
+      "nome": "Fácil",
+      "cor": "primary",
+      "icon": "mdi-numeric-1-box-outline",
+      "cor_icon": "",
+      "ativo": false
+    },
+    {
+      "id": 2,
+      "nome": "Médio",
+      "cor": "warn",
+      "icon": "mdi-numeric-2-box-outline",
+      "cor_icon": "",
+      "ativo": false
+    },
+    {
+      "id": 3,
+      "nome": "Difícil",
+      "cor": "danger",
+      "icon": "mdi-numeric-3-box-outline",
+      "cor_icon": "",
+      "ativo": false
+    }
+  ],
+  "usuario_cartas": {
+    "headers": [
+      {
+        "id": "ID",
+        "align": "start",
+        "value": "id"
+      },
+      {
+        "text": "Nome da carta",
+        "align": "start",
+        "sortable": false,
+        "value": "name"
+      },
+      {
+        "text": "Sigla",
+        "value": "sigla"
+      },
+      {
+        "text": "imagem",
+        "value": "imagem"
+      },
+      {
+        "text": "editar",
+        "value": "editar"
+      },
+      {
+        "text": "excluir",
+        "value": "excluir"
+      }
+    ],
+    "cartas": [
+      {
+        "id": 1,
+        "name": "Carta 1",
+        "sigla": "CT 1",
+        "imagem": ""
+      },
+      {
+        "id": 2,
+        "name": "Carta 2",
+        "sigla": "CT 2",
+        "imagem": ""
+      },
+      {
+        "id": 3,
+        "name": "Carta 3",
+        "sigla": "CT 3",
+        "imagem": ""
+      }
+    ]
+  }
+}

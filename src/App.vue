@@ -5,6 +5,10 @@
       color="primary"
       dark
     >
+      <h3>Jogo de Memória</h3>
+      <div class="ml-10">
+        <small>Desenvolvido por Assis Neto,  Luiza Lamarque,  Renan Schmitt,  Willian Bello</small>
+      </div>
       <v-spacer></v-spacer>
     </v-app-bar>
 
@@ -57,4 +61,42 @@ export default {
   .fade-leave-active {
     opacity: 0
   }
+
+  .back {
+    background-color: #ffc107;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+
+  .front {
+    background-color: #673ab7;
+    z-index: 2;
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+
+  .back, .front {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .back, .flipper, .front {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+
+
 </style>
