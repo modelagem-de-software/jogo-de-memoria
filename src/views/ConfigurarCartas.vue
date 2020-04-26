@@ -17,6 +17,9 @@
                                         hide-default-footer
                                         :loading="carregando" loading-text="Carregando cartas... aguarde"
                                 >
+                                    <template v-slot:item.imagem="{ item }">
+                                        <v-img :src="item.imagem" class="mt-2 mb-2" max-height="80px" max-width="80px"></v-img>
+                                    </template>
                                     <template v-slot:top>
                                         <v-toolbar flat color="white">
                                             <v-toolbar-title>Configurar Cartas</v-toolbar-title>

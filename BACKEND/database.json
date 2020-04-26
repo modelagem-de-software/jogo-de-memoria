@@ -84,14 +84,6 @@
       {
         "text": "imagem",
         "value": "imagem"
-      },
-      {
-        "text": "editar",
-        "value": "editar"
-      },
-      {
-        "text": "excluir",
-        "value": "excluir"
       }
     ],
     "cartas": [
@@ -99,19 +91,25 @@
         "id": 1,
         "name": "Carta 1",
         "sigla": "CT 1",
-        "imagem": ""
+        "imagem": "../assets/cartas/1.jpg"
       },
       {
         "id": 2,
         "name": "Carta 2",
         "sigla": "CT 2",
-        "imagem": ""
+        "imagem": "../assets/cartas/2.jpg"
       },
       {
         "id": 3,
         "name": "Carta 3",
         "sigla": "CT 3",
-        "imagem": ""
+        "imagem": "../assets/cartas/3.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Carta 4",
+        "sigla": "CT 4",
+        "imagem": "../assets/cartas/4.jpg"
       }
     ]
   }
