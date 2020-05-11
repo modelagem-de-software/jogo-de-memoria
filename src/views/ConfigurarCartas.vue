@@ -12,7 +12,7 @@
                                 <v-data-table
                                         :headers="headers"
                                         :items="desserts"
-                                        sort-by="calories"
+                                        sort-by="id"
                                         class="elevation-1"
                                         hide-default-footer
                                         :loading="carregando" loading-text="Carregando cartas... aguarde"
@@ -31,6 +31,7 @@
                                             <v-spacer></v-spacer>
                                             <v-dialog v-model="dialog" max-width="70%">
                                                 <template v-slot:activator="{ on }">
+                                                    <v-btn class="ml-5 mb-2" @click="initialize()">Atualiza Lista <v-icon>mdi-refresh</v-icon></v-btn>
                                                     <v-btn color="primary" dark class="mb-2" v-on="on">Nova Carta</v-btn>
                                                 </template>
                                                 <v-card>
@@ -199,7 +200,7 @@
                     .getCartasCadastradas()
                     .then(response => {
                         if (response) {
-                            this.desserts = response.data.cartas;
+                            this.desserts = response.data;
                             this.carregando = false;
                         }
                     }, () => {
@@ -230,9 +231,17 @@
 
             save () {
                 if (this.editedIndex > -1) {
-                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                    CartasService
+                        .atualiza(this.editedItem.id, this.editedItem)
+                        .then(() => {
+                            Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                        });
                 } else {
-                    this.desserts.push(this.editedItem)
+                    CartasService
+                        .inserir(this.editedItem)
+                        .then(response => {
+                            this.desserts.push(response.data);
+                        })
                 }
                 this.close()
             },

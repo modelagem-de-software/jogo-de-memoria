@@ -16,5 +16,14 @@ const axiosInstancia = Axios.create(configAxios);
 export default {
     getCartasCadastradas(path = 'usuario_cartas') {
         return axiosInstancia.get(path);
+    },
+
+    inserir(carta, path = 'usuario_cartas') {
+        return axiosInstancia.post(path, carta);
+    },
+
+    atualiza(id, carta) {
+        return axiosInstancia.put(`usuario_cartas/${id}`, carta);
     }
 }
+

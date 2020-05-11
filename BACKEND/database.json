@@ -64,53 +64,57 @@
       "ativo": false
     }
   ],
-  "usuario_cartas": {
-    "headers": [
-      {
-        "id": "ID",
-        "align": "start",
-        "value": "id"
-      },
-      {
-        "text": "Nome da carta",
-        "align": "start",
-        "sortable": false,
-        "value": "name"
-      },
-      {
-        "text": "Sigla",
-        "value": "sigla"
-      },
-      {
-        "text": "imagem",
-        "value": "imagem"
-      }
-    ],
-    "cartas": [
-      {
-        "id": 1,
-        "name": "Carta 1",
-        "sigla": "CT 1",
-        "imagem": "../assets/cartas/1.jpg"
-      },
-      {
-        "id": 2,
-        "name": "Carta 2",
-        "sigla": "CT 2",
-        "imagem": "../assets/cartas/2.jpg"
-      },
-      {
-        "id": 3,
-        "name": "Carta 3",
-        "sigla": "CT 3",
-        "imagem": "../assets/cartas/3.jpg"
-      },
-      {
-        "id": 4,
-        "name": "Carta 4",
-        "sigla": "CT 4",
-        "imagem": "../assets/cartas/4.jpg"
-      }
-    ]
+  "usuario_cartas": [
+    {
+      "id": 1,
+      "name": "Carta 1",
+      "sigla": "CT 1",
+      "imagem": "../assets/cartas/1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Carta 2",
+      "sigla": "CT 2",
+      "imagem": "../assets/cartas/2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Carta 3",
+      "sigla": "CT 3",
+      "imagem": "../assets/cartas/3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Carta 4",
+      "sigla": "CT 4",
+      "imagem": "../assets/cartas/4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Carta 5",
+      "sigla": "CT 5",
+      "imagem": "../assets/cartas/5.jpg"
+    },
+    {
+      "name": "Carta 6",
+      "sigla": "CT 6",
+      "imagem": "https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png?w=1024",
+      "id": 6
+    },
+    {
+      "name": "Carta 7",
+      "sigla": "CT 7",
+      "imagem": "https://static1.patasdacasa.com.br/articles/1/41/1/@/1383-verduras-e-legumes-para-cachorro-saiba-article_media_mobile-5.jpg",
+      "id": 7
+    },
+    {
+      "name": "Carta 8",
+      "sigla": "CT 8",
+      "imagem": "https://lh3.googleusercontent.com/proxy/k1U2EX8Q8Bx7FG_k5Ss1JW1WSuh872xuN8cIge6jm-lLkiiVpDBQHhUEYGfNyDnjNoOoF87fhogu7m3TTLhvKJISejTb6H6tPflfRPLUEswlvs1odNPBYiQxg829jttnZg",
+      "id": 8
+    }
+  ],
+  "usuario_atual": {
+    "dificuldade": 2
   }
 }
