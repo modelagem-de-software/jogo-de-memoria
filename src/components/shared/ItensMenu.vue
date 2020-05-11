@@ -36,6 +36,7 @@
         },
         methods: {
             ativar(botaoClicado) {
+                this.$emit('clicou', botaoClicado.id);
                 this.botoes.forEach(botao => {
                     botaoClicado.id === botao.id ? botao.ativo = true : botao.ativo = false;
                 });

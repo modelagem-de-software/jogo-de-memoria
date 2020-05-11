@@ -9,7 +9,7 @@
                         <!-- Inicia conteúdo da página -->
                         <div class="mt-10">
                             <mensagens :text="mensagem.text" :snackbar="mensagem.visivel"></mensagens>
-                            <itens-menu :botoes="botoes" titulo="Selecionar Dificuldade"></itens-menu>
+                            <itens-menu :botoes="botoes" @clicou="salvarDificuldade" titulo="Selecionar Dificuldade"></itens-menu>
                         </div>
                         <!-- Final conteúdo da página -->
                     </v-col>
@@ -43,6 +43,7 @@ export default {
     },
     created() {
       this.getItensMenu();
+      this.getDificuldade();
     },
     methods: {
         async getItensMenu() {
@@ -55,6 +56,29 @@ export default {
                 }, () => {
                     this.mensagem.text = 'Não foi possível obter os dados do servidor'
                     this.mensagem.visivel = true;
+                })
+        },
+        async salvarDificuldade(dificuldade) {
+            await MenuService
+                .salvarDificuldade(dificuldade)
+                .then(() => {
+                    this.mensagem.text = 'Dificuldade selecionada com Sucesso!';
+                    this.mensagem.visivel = true;
+                    setTimeout(() => {
+                        this.mensagem.visivel = false;
+                        this.$router.push('/configurar-jogo')
+                    }, 2000)
+                })
+        },
+        async getDificuldade() {
+            await MenuService
+                .getDificuldade()
+                .then(response => {
+                    this.botoes.forEach(botao => {
+                        if (botao.id === response.data.dificuldade) {
+                            botao.ativo = true;
+                        }
+                    })
                 })
         }
     }

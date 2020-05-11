@@ -16,5 +16,13 @@ const axiosInstancia = Axios.create(configAxios);
 export default {
     getItensMenu(path = '') {
         return axiosInstancia.get(path);
+    },
+
+    salvarDificuldade(dificuldade, path = `usuario_atual`) {
+        return axiosInstancia.put(path, { dificuldade })
+    },
+
+    getDificuldade(path = 'usuario_atual') {
+        return axiosInstancia.get(path);
     }
 }

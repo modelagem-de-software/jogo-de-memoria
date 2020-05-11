@@ -3,7 +3,7 @@
         <div class="bg-white col-10 box-com-sombra d-flex justify-center align-center border-radius-5">
             <v-row>
                 <v-col>
-                    <head-pagina></head-pagina>
+                    <head-pagina :inicio="true"></head-pagina>
                     <v-row>
                         <v-col cols="12" class="d-flex justify-center align-center">
                             <!-- Inicia conteúdo da página -->

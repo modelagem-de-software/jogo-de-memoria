@@ -50,9 +50,14 @@ export default {
     box-shadow: 0 2px 4px #999898;
   }
 
-  .fade-enter-active,
+  .fade-enter-active {
+    transition-duration: 0.2s;
+    transition-delay: 0.1s;
+    transition-property: opacity;
+    transition-timing-function: linear;
+  }
   .fade-leave-active {
-    transition-duration: 0.4s;
+    transition-duration: 0.1s;
     transition-property: opacity;
     transition-timing-function: linear;
   }

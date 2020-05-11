@@ -1,10 +1,10 @@
 <template>
-    <v-snackbar top="top" v-model="snackbar">
-        {{ text }}
+    <v-snackbar top="top" :value="snackbar">
+        {{ atualizaTexto }}
         <v-btn
             color="pink"
             text
-            @click="snackbar = false"
+            @click="fecha"
         >
             Fechar
         </v-btn>
@@ -21,6 +21,17 @@
             snackbar: {
                 default: false
             }
+        },
+        methods: {
+            fecha() {
+                this.$router.push('/configurar-jogo');
+                return this.snackbar;
+            }
+        },
+        computed: {
+            atualizaTexto() {
+                return this.text;
+            },
         }
     }
 </script>
