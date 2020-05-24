@@ -38,7 +38,17 @@ Vue.use(VueRouter)
     path: '/configurar-cartas',
     name: 'Configurações de Cartas',
     component: () => import(/* lazyloading ConfigurarCartas */ '../views/ConfigurarCartas.vue')
-  }
+  },
+  {
+    path: '/fim-de-jogo',
+    name: 'Fim de jogo',
+    component: () => import(/* lazyloading ConfigurarCartas */ '../views/FimDePartida.vue')
+  },
+  {
+    path: '/lista-jogadores',
+    name: 'Lista Jogadores',
+    component: () => import(/* lazyloading ConfigurarCartas */ '../views/ListaJogadores.vue')
+  },
 ]
 
 const router = new VueRouter({

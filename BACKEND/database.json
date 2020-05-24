@@ -110,11 +110,26 @@
     {
       "name": "Carta 8",
       "sigla": "CT 8",
-      "imagem": "https://lh3.googleusercontent.com/proxy/k1U2EX8Q8Bx7FG_k5Ss1JW1WSuh872xuN8cIge6jm-lLkiiVpDBQHhUEYGfNyDnjNoOoF87fhogu7m3TTLhvKJISejTb6H6tPflfRPLUEswlvs1odNPBYiQxg829jttnZg",
+      "imagem": "https://miro.medium.com/max/7328/1*p-x0h6EYrWvYtddjAM8lbg.jpeg",
       "id": 8
     }
   ],
   "usuario_atual": {
     "dificuldade": 1
-  }
+  },
+  "pontuacao_total": {
+    "pontuacao": "39"
+  },
+  "jogadores": [
+    {
+      "id": 1,
+      "nome": "jogador 1",
+      "pontuacao": 55
+    },
+    {
+      "nome": "Carlos",
+      "pontuacao": 39,
+      "id": 2
+    }
+  ]
 }

@@ -7,8 +7,8 @@
                     <v-row>
                         <v-col>
                             <!-- Inicia conteúdo da página -->
-                            <div class="mt-10">
-                                <h1>PÁGINA JOGAR</h1>
+                            <div>
+                                <u-i class="container" @tempoesgotado="fimDeTempo" :pontosControle="pontuacao" :combo="combo"></u-i>
                                 <div class="row cartas container ml-auto mr-auto">
                                     <div class="carta" v-for="(carta, index) in cartas"
                                          :class="{ virada: carta.virada, correta: carta.correta}"
@@ -41,11 +41,13 @@
 <script>
     import HeadPagina from "@/components/shared/HeadPagina";
     import CartasService from "@/services/CartasService";
+    import UI from "@/components/Jogar/UI";
 
     import _ from 'lodash'
+    import UsuarioService from "@/services/UsuarioService";
     export default {
         name: "Jogar",
-        components: {HeadPagina},
+        components: {HeadPagina, UI},
         data() {
             return {
                 cartas: [
@@ -60,10 +62,18 @@
                 desvirarTempo: 0,
                 mostrarResultado: false,
                 mostrarFinal: false,
-                jogadores: []
+                jogadores: [],
+                pontuacao: 0,
+                combo: 0
             }
         },
         methods: {
+            fimDeTempo(event) {
+                console.log('tempo acabou: ', event);
+                UsuarioService.salvarStorage({ pontuacao: this.pontuacao })
+                this.$router.push('fim-de-jogo');
+            },
+
             embaralhar() {
                 let baralho = [].concat(_.cloneDeep(this.cartas), _.cloneDeep(this.cartas));
                 return _.shuffle(baralho);
@@ -105,6 +115,7 @@
                     rodadas: this.rodadas
                 };
                 this.jogadores.push(jogador);
+
             },
             cartasViradas() {
                 return _.filter(this.cartas, carta => carta.virada);
@@ -131,6 +142,17 @@
                     return true;
                 }
             },
+            somaPontos() {
+                this.combo += 1;
+                if (this.combo > 1) {
+                    this.pontuacao = this.pontuacao + 1 + this.combo;
+                } else {
+                    this.pontuacao = this.pontuacao + 1;
+                }
+            },
+            errou() {
+                this.combo = 0;
+            },
             virarCarta(carta) {
                 if (carta.correta || carta.virada) return;
                 let contador = this.cartasViradas().length;
@@ -144,6 +166,7 @@
                             this.limparDesvirarTempo();
                             this.deixarCartaVirada();
                             this.desvirar();
+                            this.somaPontos();
                             if (this.verificarTodasCorretas()) {
                                 this.fim();
                             }
@@ -152,6 +175,7 @@
                         this.desvirarTempo = setTimeout( ()=> {
                             this.limparDesvirarTempo();
                             this.desvirar();
+                            this.errou();
                         }, 1000);
                     }
                 }
@@ -173,7 +197,7 @@
                     .getCartasCadastradas()
                     .then(response => {
                         if (response) {
-                            this.cartas = response.data.cartas;
+                            this.cartas = response.data;
                             this.carregando = false;
                         }
                     }, () => {
