@@ -44,7 +44,7 @@
                     .then(response => {
                         switch (response.data.dificuldade) {
                             case 1: {
-                                this.tempo = 30;
+                                this.tempo = 60;
                                 break;
                             }
                             case 2: {

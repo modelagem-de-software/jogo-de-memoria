@@ -219,6 +219,7 @@
             deleteItem (item) {
                 const index = this.desserts.indexOf(item)
                 confirm('Tem certeza que quer deletar a carta?') && this.desserts.splice(index, 1)
+                CartasService.delete(item.id);
             },
 
             close () {

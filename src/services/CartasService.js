@@ -24,6 +24,9 @@ export default {
 
     atualiza(id, carta) {
         return axiosInstancia.put(`usuario_cartas/${id}`, carta);
+    },
+    delete(id) {
+        return axiosInstancia.delete(`usuario_cartas/${id}`);
     }
 }
 
