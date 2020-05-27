@@ -104,7 +104,7 @@
                     this.tempo++;
                 }, 1000);
             },
-            fim() {
+            async fim() {
                 this.pararJogo = true;
                 clearInterval(this.cronometro);
                 this.mostrarResultado = true;
@@ -115,7 +115,10 @@
                     rodadas: this.rodadas
                 };
                 this.jogadores.push(jogador);
-
+                this.cartas = [];
+                await this.initialize();
+                this.reiniciar();
+                this.embaralhar();
             },
             cartasViradas() {
                 return _.filter(this.cartas, carta => carta.virada);
