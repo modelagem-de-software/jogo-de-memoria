@@ -35,55 +35,59 @@
                                                     <v-btn color="primary" dark class="mb-2" v-on="on">Nova Carta</v-btn>
                                                 </template>
                                                 <v-card>
-                                                    <v-card-title>
-                                                        <span class="headline">{{ formTitle }}</span>
-                                                    </v-card-title>
+                                                    <v-form ref="form" v-model="validFormEdit">
+                                                        <v-card-title>
+                                                            <span class="headline">{{ formTitle }}</span>
+                                                        </v-card-title>
 
-                                                    <v-card-text>
-                                                        <v-container>
-                                                            <v-row>
-                                                                <v-col cols="3">
-                                                                    <v-card flat tile class="d-flex">
-                                                                        <v-img
-                                                                                :src="editedItem.imagem && editedItem.imagem !== 'http://' ? editedItem.imagem : ''"
-                                                                                :lazy-src="`https://picsum.photos/1/5?`"
-                                                                                aspect-ratio="1"
-                                                                                class="grey lighten-2"
-                                                                        >
-                                                                            <template v-slot:placeholder>
-                                                                                <v-row
-                                                                                        class="fill-height ma-0"
-                                                                                        align="center"
-                                                                                        justify="center"
-                                                                                >
-                                                                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                                                                </v-row>
-                                                                            </template>
-                                                                        </v-img>
-                                                                    </v-card>
-                                                                </v-col>
-                                                                <v-col cols="9">
-                                                                    <v-row>
-                                                                        <v-col cols="12" sm="6" md="6">
-                                                                            <v-text-field v-model="editedItem.name" label="Nome da Carta"></v-text-field>
-                                                                        </v-col>
-                                                                        <v-col cols="12" sm="6" md="6">
-                                                                            <v-text-field v-model="editedItem.sigla" label="Sigla"></v-text-field>
-                                                                        </v-col>
-                                                                        <v-col cols="12" sm="6" md="12">
-                                                                            <v-text-field v-model="editedItem.imagem" label="Imagem"></v-text-field>
-                                                                        </v-col>
-                                                                    </v-row>
-                                                                </v-col>
-                                                            </v-row>
-                                                        </v-container>
-                                                    </v-card-text>
+                                                        <v-card-text>
+                                                            <v-container>
+                                                                <v-row>
+                                                                    <v-col cols="3">
+                                                                        <v-card flat tile class="d-flex">
+                                                                            <v-img
+                                                                                    :src="editedItem.imagem && editedItem.imagem !== 'http://' ? editedItem.imagem : ''"
+                                                                                    :lazy-src="`https://picsum.photos/1/5?`"
+                                                                                    aspect-ratio="1"
+                                                                                    @error="imageNaoCarregou"
+                                                                                    @load="imageCarregou"
+                                                                                    class="grey lighten-2"
+                                                                            >
+                                                                                <template v-slot:placeholder>
+                                                                                    <v-row
+                                                                                            class="fill-height ma-0"
+                                                                                            align="center"
+                                                                                            justify="center"
+                                                                                    >
+                                                                                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                                                                    </v-row>
+                                                                                </template>
+                                                                            </v-img>
+                                                                        </v-card>
+                                                                    </v-col>
+                                                                    <v-col cols="9">
+                                                                        <v-row>
+                                                                            <v-col cols="12" sm="6" md="6">
+                                                                                <v-text-field v-model="editedItem.name" :rules="rulesName" label="Nome da Carta"></v-text-field>
+                                                                            </v-col>
+                                                                            <v-col cols="12" sm="6" md="6">
+                                                                                <v-text-field v-model="editedItem.sigla" :rules="rulesSigla" label="Sigla"></v-text-field>
+                                                                            </v-col>
+                                                                            <v-col cols="12" sm="6" md="12">
+                                                                                <v-text-field v-model="editedItem.imagem" :rules="rulesImage" label="Imagem"></v-text-field>
+                                                                            </v-col>
+                                                                        </v-row>
+                                                                    </v-col>
+                                                                </v-row>
+                                                            </v-container>
+                                                        </v-card-text>
 
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                                        <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-                                                    </v-card-actions>
+                                                        <v-card-actions>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                                                            <v-btn color="blue darken-1" text :disabled="!validFormEdit" @click="save">Save</v-btn>
+                                                        </v-card-actions>
+                                                    </v-form>
                                                 </v-card>
                                             </v-dialog>
                                         </v-toolbar>
@@ -167,19 +171,36 @@
                 editedItem: {
                     name: '',
                     sigla: '',
-                    imagem: 'http://',
+                    imagem: '',
                 },
                 defaultItem: {
                     name: '',
                     sigla: '',
-                    imagem: 'http://',
-                }
+                    imagem: '',
+                },
+                errorImage: false,
+                rulesName: [
+                    v => !!v || 'É obrigatório inserir um nome',
+                    v => (v && v.length >= 3) || 'O nome precisa ter no mínimo 3 caracteres',
+                ],
+                rulesSigla: [
+                    v => !!v || 'É obrigatório inserir uma sigla',
+                ],
+                validFormEdit: false
             }
         },
         computed: {
             formTitle () {
                 return this.editedIndex === -1 ? 'Nova Carta' : 'Editar Carta'
             },
+            rulesImage () {
+                const rules = [];
+                if (this.errorImage || !this.editedItem.imagem) {
+                    rules.push('É obrigatório inserir uma imagem')
+                }
+
+                return rules;
+            }
         },
 
         watch: {
@@ -193,6 +214,13 @@
         },
 
         methods: {
+
+            imageNaoCarregou() {
+                this.errorImage = true;
+            },
+            imageCarregou() {
+                this.errorImage = false;
+            },
             initialize () {
                 this.carregando = true;
                 this.desserts = [];
