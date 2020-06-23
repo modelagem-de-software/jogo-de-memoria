@@ -45,6 +45,7 @@
 
     import _ from 'lodash'
     import UsuarioService from "@/services/UsuarioService";
+    import MenuService from "@/services/MenuService";
     export default {
         name: "Jogar",
         components: {HeadPagina, UI},
@@ -64,7 +65,8 @@
                 mostrarFinal: false,
                 jogadores: [],
                 pontuacao: 0,
-                combo: 0
+                combo: 0,
+                dificuldade: 0
             }
         },
         methods: {
@@ -193,6 +195,10 @@
                 _.map(this.cartas, carta => carta.virada = false);
             },
 
+            randomInt(min, max) {
+                return min + Math.floor((max - min) * Math.random());
+            },
+
             async initialize () {
                 this.carregando = true;
                 this.cartas = [];
@@ -200,7 +206,19 @@
                     .getCartasCadastradas()
                     .then(response => {
                         if (response) {
-                            this.cartas = response.data;
+                            let cartasTemp = [];
+                            if (response.data.length >= 3 && this.dificuldade === 1) {
+                                for (let i = 0; i < 3; i ++) {
+                                    cartasTemp.push(response.data[i]);
+                                }
+                            } else if (response.data.length >= 5 && this.dificuldade === 2) {
+                                for (let i = 0; i < 5; i ++) {
+                                    cartasTemp.push(response.data[i]);
+                                }
+                            } else {
+                                cartasTemp = response.data;
+                            }
+                            this.cartas = cartasTemp;
                             this.carregando = false;
                         }
                     }, () => {
@@ -209,6 +227,13 @@
                         this.carregando = false;
                     });
             },
+            async getDificuldade() {
+                MenuService
+                    .getDificuldade()
+                    .then(response => {
+                        this.dificuldade = response.data.dificuldade;
+                    });
+            }
         },
         computed: {
             ordenarResultados: ()=> {
@@ -225,6 +250,7 @@
             }
         },
         async created() {
+            await this.getDificuldade();
             await this.initialize();
             this.reiniciar();
             this.embaralhar();

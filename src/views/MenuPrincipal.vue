@@ -35,7 +35,11 @@ export default {
               .getItensMenu('/menu_principal')
               .then(response => {
                 if (response) {
-                  this.botoes = response.data;
+                  let botoes = response.data;
+                  if (!localStorage.getItem('admin')) {
+                    botoes.splice(2);
+                  }
+                  this.botoes = botoes;
                 }
               }, () => {
                 this.mensagem.text = 'Não foi possível obter os dados do servidor'

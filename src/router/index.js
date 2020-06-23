@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MenuPrincipal from "@/views/MenuPrincipal";
+import Admin from "@/views/Admin";
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    redirect: '/menu-principal'
+    redirect: '/admin'
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
   },
   {
     path: '/menu-principal',
